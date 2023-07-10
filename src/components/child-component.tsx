@@ -7,8 +7,9 @@ interface User {
 const ChildComponent : React.FC<User> = (user: User) => {
     return (
         <>
-            <p>{ user.username }</p>
-            <p>{ user.password }</p>
+            <h2>Child Component Data for User:</h2>
+            <p>Username: { user.username }</p>
+            <p>Password: { user.password }</p>
         </>
 
     )
