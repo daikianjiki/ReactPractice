@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import ParentComponent from './components/parent-component';
-import ParentChildPage from './pages/ParentChildPage';
+import { BrowserRouter } from 'react-router-dom'
+import Navbar from './components/navbar';
 
 function App() {
   return (
     <>
-      <ParentChildPage />
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
     </>
   );
 }
