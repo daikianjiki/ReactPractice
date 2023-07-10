@@ -1,6 +1,6 @@
 import ChildComponent from "./child-component"
 
-const ParentComponent = () => {
+const ParentComponent: React.FC = () => {
     return (
         <>
             <h1>Parent Component:</h1>

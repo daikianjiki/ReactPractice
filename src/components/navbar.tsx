@@ -1,15 +1,16 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import ParentChildPage from '../pages/ParentChildPage'
+import UseStatePage from '../pages/UseStatePage'
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     return (
         <div className="container">
         <Link to="/">
-            <Button>Home</Button>
+            <Button>Parent-Child</Button>
         </Link>
-        <Link to="/product">
-            <Button>Products</Button>
+        <Link to="/usestate">
+            <Button>UseState</Button>
         </Link>
         <Link to="/cart">
             <Button>Cart</Button>
@@ -18,6 +19,7 @@ const Navbar = () => {
         <Routes>
             {/* <Route path ='/' element = {<HomePage/>} /> */}
             <Route path ='/' element = {<ParentChildPage/>} />
+            <Route path ='/usestate' element = {<UseStatePage/>} />
         </Routes>
     </div>
     )
