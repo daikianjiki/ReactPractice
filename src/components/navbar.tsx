@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import ParentChildPage from '../pages/ParentChildPage'
 import UseStatePage from '../pages/UseStatePage'
+import PokemonPage from '../pages/PokemonPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -12,14 +13,14 @@ const Navbar: React.FC = () => {
         <Link to="/usestate">
             <Button>UseState</Button>
         </Link>
-        <Link to="/cart">
-            <Button>Cart</Button>
+        <Link to="/pokemon">
+            <Button>Pokemon</Button>
         </Link>
         
         <Routes>
-            {/* <Route path ='/' element = {<HomePage/>} /> */}
             <Route path ='/' element = {<ParentChildPage/>} />
             <Route path ='/usestate' element = {<UseStatePage/>} />
+            <Route path ='/pokemon' element = {<PokemonPage/>} />
         </Routes>
     </div>
     )
