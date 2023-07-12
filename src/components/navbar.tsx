@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import ParentChildPage from '../pages/ParentChildPage'
 import UseStatePage from '../pages/UseStatePage'
 import PokemonPage from '../pages/PokemonPage'
+import FormPage from '../pages/FormPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -16,11 +17,15 @@ const Navbar: React.FC = () => {
         <Link to="/pokemon">
             <Button>Pokemon</Button>
         </Link>
+        <Link to="/form">
+            <Button>Form</Button>
+        </Link>
         
         <Routes>
             <Route path ='/' element = {<ParentChildPage/>} />
             <Route path ='/usestate' element = {<UseStatePage/>} />
             <Route path ='/pokemon' element = {<PokemonPage/>} />
+            <Route path ='/form' element = {<FormPage/>} />
         </Routes>
     </div>
     )
