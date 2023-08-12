@@ -48,7 +48,9 @@ export default function ProductsPage() {
     return (
         <div className="row">
             <div className="col-lg-8 mx-auto">
-                <Products products={products} />
+                <ul className="list-group shadow">
+                    <Products products={products} />
+                </ul>
             </div>
         </div>
     )
