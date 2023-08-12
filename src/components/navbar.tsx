@@ -4,6 +4,7 @@ import ParentChildPage from '../pages/ParentChildPage'
 import UseStatePage from '../pages/UseStatePage'
 import PokemonPage from '../pages/PokemonPage'
 import FormPage from '../pages/FormPage'
+import ProductsPage from '../pages/ProductsPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -20,12 +21,16 @@ const Navbar: React.FC = () => {
         <Link to="/form">
             <Button>Form</Button>
         </Link>
+        <Link to="/products">
+            <Button>Products</Button>
+        </Link>
         
         <Routes>
             <Route path ='/' element = {<ParentChildPage/>} />
             <Route path ='/usestate' element = {<UseStatePage/>} />
             <Route path ='/pokemon' element = {<PokemonPage/>} />
             <Route path ='/form' element = {<FormPage/>} />
+            <Route path ='/products' element = {<ProductsPage/>} />
         </Routes>
     </div>
     )

@@ -5,11 +5,6 @@ const ParentChildPage = () => {
     return (
         <>
             <ParentComponent />
-            <div className="row">
-                <div className="col-lg-8 mx-auto">
-                    <Products />
-                </div>
-            </div>
         </>
     )
 }
