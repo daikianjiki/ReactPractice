@@ -1,5 +1,14 @@
 
 let productCount = 0
+// if you have an image uploaded on to the application, to render the image, you 
+// will need the require method.
+let imageUrl = require("../images/Milk.jpg")
+
+let style = {
+    padding: '0px 20px',
+    fontSize: 12
+    //or 'font-size': 14
+}
 
 function displayFormattedProductionCount() {
     return (
@@ -16,12 +25,15 @@ export default function Products() {
                         <h5 className="mt-0 font-weight-bold mb-2">Fresh Milk</h5>
                         <p className="font-italic text-muted mb-0 small">This is milk. It's creamy and tasty and great for health! Have a glass, it will be worth your while!</p>
                         <div className="d-flex align-items-center justify-content-start mt-1">
-                            <h6 className="font-weight-bold my-2">$120.00</h6>
+                            {/* Here we are using an inline styling and it requires double curly braces {{}} */}
+                            <h6 className="font-weight-bold my-2" style={{marginRight: 30}}>$120.00</h6>
                             <button className="btn btn-primary">-</button>
-                            <span>{ displayFormattedProductionCount() }</span>
+                            {/* Here we are assigning styling to a variable and passing the variable within the curly braces. */}
+                            <span style={style}>{ displayFormattedProductionCount() }</span>
                             <button className="btn btn-primary">+</button>
                         </div>
-                    </div><img src="" alt="Generic placeholder image" width="200" className="ml-;g-5 order-1 orderlg-2" />
+                    </div>
+                    <img src={imageUrl} alt="Generic placeholder image" width="200" className="ml-;g-5 order-1 orderlg-2" />
                 </div>
             </li>
         </ul>
