@@ -3,6 +3,10 @@ let productCount = 0
 // if you have an image uploaded on to the application, to render the image, you 
 // will need the require method.
 let imageUrl = require("../images/Milk.jpg")
+let isAvailable = 'Unavailable'
+
+let badgeClass = 'badge-margin-left-240 badge '
+badgeClass += isAvailable === 'Available' ? 'bg-success' : 'bg-danger'
 
 let style = {
     padding: '0px 20px',
@@ -31,6 +35,7 @@ export default function Products() {
                             {/* Here we are assigning styling to a variable and passing the variable within the curly braces. */}
                             <span style={style}>{ displayFormattedProductionCount() }</span>
                             <button className="btn btn-primary">+</button>
+                            <span className={badgeClass}>{isAvailable}</span>
                         </div>
                     </div>
                     <img src={imageUrl} alt="Generic placeholder image" width="200" className="ml-;g-5 order-1 orderlg-2" />
