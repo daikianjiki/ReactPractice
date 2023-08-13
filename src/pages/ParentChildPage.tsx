@@ -1,4 +1,4 @@
-import Products from "../components/Products"
+import Products from "../components/ProductList/Products"
 import ParentComponent from "../components/parent-component"
 
 const ParentChildPage = () => {

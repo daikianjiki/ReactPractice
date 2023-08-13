@@ -1,4 +1,6 @@
-import Products from "../components/Products";
+import CreateProduct from "../components/CreateProduct/CreateProduct";
+import ProductForm from "../components/CreateProduct/ProductForm";
+import Products from "../components/ProductList/Products";
 import { Product } from "../models/Product";
 
 const products: Product[] = [
@@ -46,6 +48,8 @@ const products: Product[] = [
 
 export default function ProductsPage() {
     return (
+        <>
+        <CreateProduct />
         <div className="row">
             <div className="col-lg-8 mx-auto">
                 <ul className="list-group shadow">
@@ -53,5 +57,6 @@ export default function ProductsPage() {
                 </ul>
             </div>
         </div>
+        </>
     )
 }

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Product } from "../models/Product"
+import { Product } from "../../models/Product"
 
 let style = {
     padding: '0px 20px',
