@@ -1,24 +1,53 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function ProductForm() {
+    // let [name, setName] = useState('')
+    // let [price, setPrice] = useState('')
+    // let [description, setDescription] = useState('')
+    // let [availability, setAvailability] = useState('')
+    // let [image, setImage] = useState('')
+
+    let [userInput, setUserInput] = useState({
+        name: '',
+        price: '',
+        description: '',
+        availability: '',
+        image: ''
+    })
+
     function nameInputHandler(event: ChangeEvent<HTMLInputElement>) {
-        console.log(event.target.value)
+        //setName(event.target.value)
+        setUserInput({
+            ...userInput, 
+            name: event.target.value})
     }
 
     function priceInputHandler(event: ChangeEvent<HTMLInputElement>) {
-        
+        //setPrice(event.target.value)
+        setUserInput({
+            ...userInput, 
+            price: event.target.value})
     }
 
     function descriptionInputHandler(event: ChangeEvent<HTMLInputElement>) {
-
+        //setDescription(event.target.value)
+        setUserInput({
+            ...userInput, 
+            description: event.target.value})
     }
 
-    function availabilityInputHandler(even: ChangeEvent<HTMLInputElement>) {
-
+    function availabilityInputHandler(event: ChangeEvent<HTMLInputElement>) {
+        //setAvailability(event.target.value)
+        setUserInput({
+            ...userInput, 
+            availability: event.target.value})
     }
 
     function imageInputHandler(event: ChangeEvent<HTMLInputElement>) {
-
+        //setImage(event.target.value)
+        setUserInput({
+            ...userInput, 
+            image: event.target.value})
     }
     return (
         <form className="row g-3">
