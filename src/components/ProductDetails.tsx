@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Product } from "../models/Product"
 
 let style = {
@@ -12,18 +13,18 @@ interface ProductDetailsProp {
 }
 
 export default function ProductDetails(props: ProductDetailsProp) {
-    let productCount = 0
+    let [productCount, setProductCount] = useState(0);
     function displayFormattedProductionCount() {
         return (
             productCount > 0 ? productCount : 'Zero'
             )
     }
     let incrementProductCount = () => {
-        productCount++
+        setProductCount(++productCount)
         console.log(productCount)
     }
     let decrementProductCount = () => {
-        productCount--
+        setProductCount(--productCount)
         console.log(productCount)
     }
     return (
