@@ -31,7 +31,7 @@ export default function ProductDetails(props: ProductDetailsProp) {
         <div className="d-flex align-items-center justify-content-start mt-1">
         {/* Here we are using an inline styling and it requires double curly braces {{}} */}
         <h6 className="font-weight-bold my-2" style={{marginRight: 30}}>${props.product.price}</h6>
-        <button onClick={decrementProductCount} className="btn btn-primary">-</button>
+        <button onClick={decrementProductCount} className="btn btn-primary" disabled={productCount == 0}>-</button>
         {/* Here we are assigning styling to a variable and passing the variable within the curly braces. */}
         <span style={style}>{ displayFormattedProductionCount() }</span>
         <button onClick={incrementProductCount} className="btn btn-primary">+</button>

@@ -6,16 +6,15 @@ interface ProductsProps {
 }
     
 export default function Products(props: ProductsProps) {
-    const { product } = props
     return (
-        <li className="list-group-item">
+        <li className="list-group-item" style={{backgroundColor: props.product.isAvailable ? 'white' : '#dedede'}}>
             <div className="media align-items-lg-center flex-column flex-lg-row p-3 d-flex">
                 <div className="media-body order-2 order-lg-1">
-                    <h5 className="mt-0 font-weight-bold mb-2">{product.pName}</h5>
-                    <p className="font-italic text-muted mb-0 small">{product.desc}</p>
-                    <ProductDetails product={product} />
+                    <h5 className="mt-0 font-weight-bold mb-2">{props.product.pName}</h5>
+                    <p className="font-italic text-muted mb-0 small">{props.product.desc}</p>
+                    <ProductDetails product={props.product} />
                 </div>
-                <img src={product.image} alt={product.pName} width="200" className="ml-;g-5 order-1 orderlg-2" />
+                <img src={props.product.image} alt={props.product.pName} width="200" className="ml-;g-5 order-1 orderlg-2" />
             </div>
         </li>
     )

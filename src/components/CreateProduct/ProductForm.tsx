@@ -3,6 +3,7 @@ import { Product } from "../../models/Product";
 
 interface ProductProps {
     createProduct: (product: Product) => void
+    onCancel: any
 }
 
 export default function ProductForm(props: ProductProps) {
@@ -98,6 +99,7 @@ export default function ProductForm(props: ProductProps) {
         })
 
         props.createProduct(product)
+        props.onCancel()
     }
     return (
         <form className="row g-3" onSubmit={createProductEventHandler}>
@@ -147,6 +149,7 @@ export default function ProductForm(props: ProductProps) {
             
 
             <button type="submit" className="btn btn-primary">Add Product</button>
+            <button type="button" onClick={props.onCancel}>Cancel</button>
         </form>
     )
 }
