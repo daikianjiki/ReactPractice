@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Login from "../components/Login";
+import AuthContext from "../components/Context/AuthContext";
 
 export default function LoginPage() {
     const [isLoggedIn, updateIsLoggedIn] = useState(false)
@@ -23,18 +24,20 @@ export default function LoginPage() {
     }
 
     return (
-        <main>
-            {isLoggedIn ? (
-                <div>
-                    <p>Welcome! You are logged in.</p>
-                    <button onClick={logoutHandler}>Logout</button>
-                </div>
-            ) : (
-                <Login 
-                    onLogin={loginHandler}
-                    isLoggedIn={isLoggedIn}
-                    logoutHandler={logoutHandler} />
-            )}
-        </main>
+        <AuthContext.Provider value={{isLoggedIn: isLoggedIn}} >
+            <main>
+                {isLoggedIn ? (
+                    <div>
+                        <p>Welcome! You are logged in.</p>
+                        <button onClick={logoutHandler}>Logout</button>
+                    </div>
+                ) : (
+                    <Login 
+                        onLogin={loginHandler}
+                        isLoggedIn={isLoggedIn}
+                        logoutHandler={logoutHandler} />
+                )}
+            </main>
+        </AuthContext.Provider>
     )
 }

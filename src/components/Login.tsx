@@ -1,5 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useReducer, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useReducer, useState, useContext } from "react";
 import { Button, Card } from "react-bootstrap";
+import AuthContext from "./Context/AuthContext";
 
 type EmailState = {
     value: string
@@ -84,12 +85,14 @@ export default function Login(props: LoginProps) {
         props.onLogin(emailState.value, passwordState.value)
 
     }
+
+    let context = useContext(AuthContext)
     return (
         <>
         <h3>Validated Form using useReducer</h3>
         <h4>Enter proper email and password longer than 6 characters.</h4>
         <Card>
-            {props.isLoggedIn ? (
+            {context.isLoggedIn ? (
                 <div>
                     <p>Welcome! You are logged in.</p>
                     <button onClick={props.logoutHandler}>Logout</button>
