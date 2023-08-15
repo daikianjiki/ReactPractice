@@ -7,6 +7,7 @@ import FormPage from '../pages/FormPage'
 import ProductsPage from '../pages/ProductsPage'
 import UseRefPage from '../pages/UseRefPage'
 import UseReducerPage from '../pages/UseReducerPage'
+import Login from './Login'
 
 const Navbar: React.FC = () => {
     return (
@@ -32,6 +33,9 @@ const Navbar: React.FC = () => {
             <Link to="/reducer">
                 <Button>UseReducer</Button>
             </Link>
+            <Link to="/login">
+                <Button>Login</Button>
+            </Link>
             
             <Routes>
                 <Route path ='/' element = {<ParentChildPage/>} />
@@ -41,6 +45,7 @@ const Navbar: React.FC = () => {
                 <Route path ='/products' element = {<ProductsPage/>} />
                 <Route path ='/refs' element = {<UseRefPage/>} />
                 <Route path ='/reducer' element = {<UseReducerPage/>} />
+                <Route path ='/login' element = {<Login />} />
             </Routes>
         </div>
     )
