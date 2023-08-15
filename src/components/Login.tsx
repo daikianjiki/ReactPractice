@@ -31,7 +31,13 @@ function passwordReducer(state: PasswordState, action: PasswordAction) {
     }
 }
 
-export default function Login(props: any) {
+interface LoginProps {
+    onLogin: (email: string, password: string) => void;
+    isLoggedIn: boolean;
+    logoutHandler: () => void;
+}
+
+export default function Login(props: LoginProps) {
     const [formIsValid, setFormIsValid] = useState(false)
 
     const initialEmailState: EmailState = {
@@ -80,27 +86,35 @@ export default function Login(props: any) {
     }
     return (
         <>
-            <h3>Validated Form using useReducer</h3>
-            <h4>Enter proper email and password longer than 6 characters.</h4>
-            <Card>
+        <h3>Validated Form using useReducer</h3>
+        <h4>Enter proper email and password longer than 6 characters.</h4>
+        <Card>
+            {props.isLoggedIn ? (
+                <div>
+                    <p>Welcome! You are logged in.</p>
+                    <button onClick={props.logoutHandler}>Logout</button>
+                </div>
+            ) : (
                 <form onSubmit={submitHandler}>
                     <div>
                         <label htmlFor="email">E-Mail</label>
-                        <input 
+                        <input
                             type="email"
                             id="email"
                             value={emailState.value}
                             onChange={emailChangeHandler}
-                            onBlur={validateEmailHandler} />
+                            onBlur={validateEmailHandler}
+                        />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input 
+                        <input
                             type="password"
                             id="password"
                             value={passwordState.value}
                             onChange={passwordChangeHandler}
-                            onBlur={validatePasswordHandler}/>
+                            onBlur={validatePasswordHandler}
+                        />
                     </div>
                     <div>
                         <Button type="submit" disabled={!formIsValid}>
@@ -108,6 +122,7 @@ export default function Login(props: any) {
                         </Button>
                     </div>
                 </form>
+                )}
             </Card>
         </>
     )

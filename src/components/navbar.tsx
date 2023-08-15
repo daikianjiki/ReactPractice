@@ -7,7 +7,7 @@ import FormPage from '../pages/FormPage'
 import ProductsPage from '../pages/ProductsPage'
 import UseRefPage from '../pages/UseRefPage'
 import UseReducerPage from '../pages/UseReducerPage'
-import Login from './Login'
+import LoginPage from '../pages/LoginPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
                 <Route path ='/products' element = {<ProductsPage/>} />
                 <Route path ='/refs' element = {<UseRefPage/>} />
                 <Route path ='/reducer' element = {<UseReducerPage/>} />
-                <Route path ='/login' element = {<Login />} />
+                <Route path ='/login' element = {<LoginPage />} />
             </Routes>
         </div>
     )
