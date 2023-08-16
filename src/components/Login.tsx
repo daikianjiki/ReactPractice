@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useReducer, useState, useContext } from "react";
 import { Button, Card } from "react-bootstrap";
-import AuthContext from "./Context/AuthContext";
+import { AuthContext } from "./Context/AuthContext";
 
 type EmailState = {
     value: string
@@ -32,13 +32,7 @@ function passwordReducer(state: PasswordState, action: PasswordAction) {
     }
 }
 
-interface LoginProps {
-    onLogin: (email: string, password: string) => void;
-    isLoggedIn: boolean;
-    logoutHandler: () => void;
-}
-
-export default function Login(props: LoginProps) {
+export default function Login() {
     const [formIsValid, setFormIsValid] = useState(false)
 
     const initialEmailState: EmailState = {
@@ -50,10 +44,12 @@ export default function Login(props: LoginProps) {
         value: "",
         isValid: false
     }
-
+    
     let [emailState, emailDispatcher] = useReducer(emailReducer, initialEmailState)
     let [passwordState,  passwordDispatcher] = useReducer(passwordReducer, initialPasswordState)
-
+    
+    let context = useContext(AuthContext)
+    
     useEffect(() => {
         let value = setTimeout(() => {
             setFormIsValid(emailState.value.includes('@') && passwordState.value.trim().length > 6)
@@ -82,11 +78,12 @@ export default function Login(props: LoginProps) {
 
     function submitHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        props.onLogin(emailState.value, passwordState.value)
-
+        console.log("trying to log in...")
+        context.onLogin(emailState.value, passwordState.value)
     }
 
-    let context = useContext(AuthContext)
+    console.log("isLoggedIn:", context.isLoggedIn)
+
     return (
         <>
         <h3>Validated Form using useReducer</h3>
@@ -95,7 +92,7 @@ export default function Login(props: LoginProps) {
             {context.isLoggedIn ? (
                 <div>
                     <p>Welcome! You are logged in.</p>
-                    <button onClick={props.logoutHandler}>Logout</button>
+                    <button onClick={context.onLogout}>Logout</button>
                 </div>
             ) : (
                 <form onSubmit={submitHandler}>

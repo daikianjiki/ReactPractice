@@ -1,43 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import Login from "../components/Login";
 import AuthContext from "../components/Context/AuthContext";
 
 export default function LoginPage() {
-    const [isLoggedIn, updateIsLoggedIn] = useState(false)
+    let ctx = useContext(AuthContext)
 
-    useEffect(() => {
-        let isLoggedInValue = localStorage.getItem('isLoggedIn')
-
-        if (isLoggedInValue === '1') {
-            updateIsLoggedIn(true)
-        }
-    }, [])
-    
-    const loginHandler = (email: string, password: string) => {
-        localStorage.setItem('isLoggedIn', '1')
-        updateIsLoggedIn(true)
-    }
-
-    const logoutHandler = () => {
-        localStorage.removeItem('isLoggedIn')
-        updateIsLoggedIn(false)
-    }
-
+    console.log("login page rendering... ")
     return (
-        <AuthContext.Provider value={{isLoggedIn: isLoggedIn}} >
+        <>
             <main>
-                {isLoggedIn ? (
+                {ctx.isLoggedIn ? (
                     <div>
                         <p>Welcome! You are logged in.</p>
-                        <button onClick={logoutHandler}>Logout</button>
+                        <button onClick={ctx.onLogout}>Logout</button>
                     </div>
                 ) : (
-                    <Login 
-                        onLogin={loginHandler}
-                        isLoggedIn={isLoggedIn}
-                        logoutHandler={logoutHandler} />
+                    <Login />
                 )}
             </main>
-        </AuthContext.Provider>
+        </>
     )
 }

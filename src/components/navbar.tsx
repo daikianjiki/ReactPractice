@@ -8,6 +8,7 @@ import ProductsPage from '../pages/ProductsPage'
 import UseRefPage from '../pages/UseRefPage'
 import UseReducerPage from '../pages/UseReducerPage'
 import LoginPage from '../pages/LoginPage'
+import AuthContext from './Context/AuthContext'
 
 const Navbar: React.FC = () => {
     return (
@@ -45,7 +46,12 @@ const Navbar: React.FC = () => {
                 <Route path ='/products' element = {<ProductsPage/>} />
                 <Route path ='/refs' element = {<UseRefPage/>} />
                 <Route path ='/reducer' element = {<UseReducerPage/>} />
-                <Route path ='/login' element = {<LoginPage />} />
+                <Route path ='/login' element = {
+                    <AuthContext.Provider value={{isLoggedIn:false, onLogout: () => {}, onLogin: () => {}}}>
+                        <LoginPage />
+                    </AuthContext.Provider>
+                } />
+
             </Routes>
         </div>
     )
