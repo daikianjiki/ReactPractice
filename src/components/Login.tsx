@@ -1,6 +1,8 @@
-import { ChangeEvent, FormEvent, useEffect, useReducer, useState, useContext } from "react";
+import { ChangeEvent, FormEvent, useEffect, useReducer, useState, useContext, useRef } from "react";
 import { Button, Card } from "react-bootstrap";
 import { AuthContext } from "./Context/AuthContext";
+import Input from "./Input/input";
+import classes from './Input/input.module.css'
 
 type EmailState = {
     value: string
@@ -49,6 +51,9 @@ export default function Login() {
     let [passwordState,  passwordDispatcher] = useReducer(passwordReducer, initialPasswordState)
     
     let context = useContext(AuthContext)
+
+    let emailRef = useRef<HTMLInputElement>(null)
+    let passwordRef = useRef<HTMLInputElement>(null)
     
     useEffect(() => {
         let value = setTimeout(() => {
@@ -78,8 +83,13 @@ export default function Login() {
 
     function submitHandler(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        console.log("trying to log in...")
-        context.onLogin(emailState.value, passwordState.value)
+        if (formIsValid) {
+            context.onLogin(emailState.value, passwordState.value)
+        } else if (!emailState.isValid) {
+            emailRef.current?.focus()
+        } else {
+            passwordRef.current?.focus()
+        }
     }
 
     console.log("isLoggedIn:", context.isLoggedIn)
@@ -88,7 +98,7 @@ export default function Login() {
         <>
         <h3>Validated Form using useReducer</h3>
         <h4>Enter proper email and password longer than 6 characters.</h4>
-        <Card>
+        <Card className={classes.login}>
             {context.isLoggedIn ? (
                 <div>
                     <p>Welcome! You are logged in.</p>
@@ -96,28 +106,28 @@ export default function Login() {
                 </div>
             ) : (
                 <form onSubmit={submitHandler}>
+                    <Input 
+                        ref={emailRef}
+                        type="email" 
+                        id="email" 
+                        value={emailState.value} 
+                        isValid={emailState.isValid}
+                        onChangeHandler={emailChangeHandler} 
+                        onBlurHandler={validateEmailHandler} >
+                        E-mail
+                    </Input>
+                    <Input 
+                        ref={passwordRef}
+                        type="password" 
+                        id="password" 
+                        value={passwordState.value}
+                        isValid={passwordState.isValid} 
+                        onChangeHandler={passwordChangeHandler} 
+                        onBlurHandler={validatePasswordHandler} >
+                        Password
+                    </Input>
                     <div>
-                        <label htmlFor="email">E-Mail</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={emailState.value}
-                            onChange={emailChangeHandler}
-                            onBlur={validateEmailHandler}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={passwordState.value}
-                            onChange={passwordChangeHandler}
-                            onBlur={validatePasswordHandler}
-                        />
-                    </div>
-                    <div>
-                        <Button type="submit" disabled={!formIsValid}>
+                        <Button type="submit">
                             Login
                         </Button>
                     </div>
