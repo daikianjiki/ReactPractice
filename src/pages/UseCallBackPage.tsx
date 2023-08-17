@@ -1,4 +1,4 @@
-import UseCallBackDemo from "../components/UseCallBackDemo/UseCAllBackDemo";
+import UseCallBackDemo from "../components/UseCallBackDemo/UseCallBackDemo";
 
 export default function UseCallBackPage() {
     return (
