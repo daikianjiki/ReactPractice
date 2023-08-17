@@ -11,6 +11,7 @@ import LoginPage from '../pages/LoginPage'
 import AuthContext from './Context/AuthContext'
 import UseCallBackPage from '../pages/UseCallBackPage'
 import ClassBasedComponentsPage from '../pages/ClassBasedComponentsPage'
+import UserPage from '../pages/UserPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -45,6 +46,9 @@ const Navbar: React.FC = () => {
             <Link to="/class">
                 <Button>ClassBased</Button>
             </Link>
+            <Link to="/user">
+                <Button>User</Button>
+            </Link>
             
             <Routes>
                 <Route path ='/' element = {<ParentChildPage/>} />
@@ -61,6 +65,7 @@ const Navbar: React.FC = () => {
                 } />
                 <Route path ='/callback' element = {<UseCallBackPage/>} />
                 <Route path ='/class' element = {<ClassBasedComponentsPage/>} />
+                <Route path ='/user' element = {<UserPage/>} />
             </Routes>
         </div>
     )
