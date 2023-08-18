@@ -21,7 +21,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+#modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 50px;

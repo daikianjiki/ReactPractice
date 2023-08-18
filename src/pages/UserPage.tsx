@@ -1,10 +1,12 @@
 import { useState } from "react"
 import UserDetails from "../components/User/UserDetails"
 import UserForm from "../components/User/UserForm"
+import axios from "axios"
 
 
 export default function UserPage() {
-    let[showForm, setShowForm] = useState(false)
+    let [showForm, setShowForm] = useState(false)
+    let [users, setUsers] = useState([])
 
     function openForm() {
         setShowForm(true)
@@ -14,14 +16,46 @@ export default function UserPage() {
         setShowForm(false)
     }
 
+    function onCreateUser(user: any) {
+        // fetch('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json', {
+        //     method: 'POST',
+        //     body: JSON.stringify(user),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        // .then((res) => {
+        //     console.log(res)
+        // })
+
+        axios.post('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json', user)
+            .then((res) => {
+                console.log(res.data)
+            })
+    }
+
+    function fetchUsers() {
+        fetch('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json')
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                let userData = []
+                for (let key in data) {
+                    userData.push({...data[key], id: key})
+                }
+                setUsers(userData as never[])
+            })
+    }
+
     return (
         <div>
             <div className="page-header">
                 <button className="btn btn-success" onClick={openForm}>Add User</button>
-                <button className="btn btn-warning">Get Users</button>
+                <button className="btn btn-warning" onClick={fetchUsers}>Get Users</button>
             </div>
-            <UserDetails></UserDetails>
-            {showForm && <UserForm closeForm={closeForm}></UserForm>}
+            <UserDetails users={users}></UserDetails>
+            {showForm && <UserForm closeForm={closeForm} onCreateUser={onCreateUser}></UserForm>}
         </div>
     )
 }
