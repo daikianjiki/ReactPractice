@@ -10,12 +10,15 @@ export default function UserPage() {
     let [users, setUsers] = useState([])
     let [loading, setLoading] = useState(false)
     let [errorMessage, setErrorMessage] = useState('')
+    let [editMode, setEditMode] = useState(false)
+    let [editUser, setEditUser] = useState(null)
 
     useEffect(() => {
         fetchUsers()
     }, [])
 
     function openForm() {
+        setEditMode(false)
         setShowForm(true)
     }
 
@@ -63,6 +66,12 @@ export default function UserPage() {
                 setLoading(false)
             })
     }
+    function onEditUser(user: any) {
+        setEditMode(true)
+        setEditUser(user)
+        setShowForm(true)
+        console.log(user)
+    }
 
     return (
         <div>
@@ -70,10 +79,10 @@ export default function UserPage() {
                 <button className="btn btn-success" onClick={openForm}>Add User</button>
                 <button className="btn btn-warning" onClick={fetchUsers}>Get Users</button>
             </div>
-            {!loading && !errorMessage && <UserDetails users={users}></UserDetails>}
+            {!loading && !errorMessage && <UserDetails users={users} onEditUser={onEditUser}></UserDetails>}
             {errorMessage && <h3 style={{textAlign: 'center'}}>{errorMessage}</h3>}
             {loading && <Loader />}
-            {showForm && <UserForm closeForm={closeForm} onCreateUser={onCreateUser}></UserForm>}
+            {showForm && <UserForm closeForm={closeForm} onCreateUser={onCreateUser} editMode={editMode} user={editUser}></UserForm>}
         </div>
     )
 }
