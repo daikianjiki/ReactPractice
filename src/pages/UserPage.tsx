@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import UserDetails from "../components/User/UserDetails"
 import UserForm from "../components/User/UserForm"
 import axios from "axios"
@@ -9,6 +9,11 @@ export default function UserPage() {
     let [showForm, setShowForm] = useState(false)
     let [users, setUsers] = useState([])
     let [loading, setLoading] = useState(false)
+    let [errorMessage, setErrorMessage] = useState('')
+
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
     function openForm() {
         setShowForm(true)
@@ -33,11 +38,14 @@ export default function UserPage() {
         axios.post('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json', user)
             .then((res) => {
                 console.log(res.data)
+                fetchUsers()
+                setShowForm(false)
             })
     }
 
     function fetchUsers() {
         setLoading(true)
+        setErrorMessage('')
         fetch('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json')
             .then((res) => {
                 return res.json();
@@ -50,6 +58,10 @@ export default function UserPage() {
                 setUsers(userData as never[])
                 setLoading(false)
             })
+            .catch((error) => {
+                setErrorMessage(error.message)
+                setLoading(false)
+            })
     }
 
     return (
@@ -58,7 +70,8 @@ export default function UserPage() {
                 <button className="btn btn-success" onClick={openForm}>Add User</button>
                 <button className="btn btn-warning" onClick={fetchUsers}>Get Users</button>
             </div>
-            {!loading && <UserDetails users={users}></UserDetails>}
+            {!loading && !errorMessage && <UserDetails users={users}></UserDetails>}
+            {errorMessage && <h3 style={{textAlign: 'center'}}>{errorMessage}</h3>}
             {loading && <Loader />}
             {showForm && <UserForm closeForm={closeForm} onCreateUser={onCreateUser}></UserForm>}
         </div>
