@@ -2,11 +2,13 @@ import { useState } from "react"
 import UserDetails from "../components/User/UserDetails"
 import UserForm from "../components/User/UserForm"
 import axios from "axios"
+import Loader from "../components/User/Loader"
 
 
 export default function UserPage() {
     let [showForm, setShowForm] = useState(false)
     let [users, setUsers] = useState([])
+    let [loading, setLoading] = useState(false)
 
     function openForm() {
         setShowForm(true)
@@ -35,6 +37,7 @@ export default function UserPage() {
     }
 
     function fetchUsers() {
+        setLoading(true)
         fetch('https://react-tutorial-6178d-default-rtdb.firebaseio.com/users.json')
             .then((res) => {
                 return res.json();
@@ -45,6 +48,7 @@ export default function UserPage() {
                     userData.push({...data[key], id: key})
                 }
                 setUsers(userData as never[])
+                setLoading(false)
             })
     }
 
@@ -54,7 +58,8 @@ export default function UserPage() {
                 <button className="btn btn-success" onClick={openForm}>Add User</button>
                 <button className="btn btn-warning" onClick={fetchUsers}>Get Users</button>
             </div>
-            <UserDetails users={users}></UserDetails>
+            {!loading && <UserDetails users={users}></UserDetails>}
+            {loading && <Loader />}
             {showForm && <UserForm closeForm={closeForm} onCreateUser={onCreateUser}></UserForm>}
         </div>
     )
