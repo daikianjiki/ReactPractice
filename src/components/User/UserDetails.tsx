@@ -3,11 +3,16 @@ import './UserDetails.css'
 interface userProps {
     users: any
     onEditUser: (user: any) => void
+    onDeleteUser: (user: any) => void
 }
 
 export default function UserDetails(props: userProps) {
     function onEditUserClicked(event: any, user: any) {
         props.onEditUser(user)
+    }
+
+    function onDeleteUserClicked(event: any, user: any) {
+        props.onDeleteUser(user)
     }
     return (
         <>
@@ -34,8 +39,8 @@ export default function UserDetails(props: userProps) {
                                 <td>{user.country}</td>
                                 <td>{user.city}</td>
                                 <td>
-                                    <button className="btn btn-primary" onClick={(event) => onEditUserClicked(event, user)}>Edit</button>
-                                    <button className="btn btn-danger">Delete</button>
+                                    <button className="btn btn-warning" onClick={(event) => onEditUserClicked(event, user)}>Edit</button>
+                                    <button className="btn btn-danger" onClick={(event) => onDeleteUserClicked(event, user)}>Delete</button>
                                 </td>
                             </tr>
                         ))}
