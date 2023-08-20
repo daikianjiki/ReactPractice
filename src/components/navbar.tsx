@@ -13,6 +13,7 @@ import UseCallBackPage from '../pages/UseCallBackPage'
 import ClassBasedComponentsPage from '../pages/ClassBasedComponentsPage'
 import UserPage from '../pages/UserPage'
 import CustomHookPage from '../pages/CustomHookPage'
+import CustomHTTPHookPage from '../pages/CustomHTTPHookPage'
 
 const Navbar: React.FC = () => {
     return (
@@ -53,6 +54,9 @@ const Navbar: React.FC = () => {
             <Link to="/customhook">
                 <Button>CustomHook</Button>
             </Link>
+            <Link to="/customhttphook">
+                <Button>CustomHTTPHook</Button>
+            </Link>
             
             <Routes>
                 <Route path ='/' element = {<ParentChildPage/>} />
@@ -71,6 +75,7 @@ const Navbar: React.FC = () => {
                 <Route path ='/class' element = {<ClassBasedComponentsPage/>} />
                 <Route path ='/user' element = {<UserPage/>} />
                 <Route path ='/customhook' element = {<CustomHookPage/>} />
+                <Route path ='/customhttphook' element = {<CustomHTTPHookPage/>} />
             </Routes>
         </div>
     )
